@@ -43,6 +43,7 @@ def main(ctx):
                     "cd ..",
                     "mkdir build",
                     "cd build",
+                    "sudo apt-get update",
                     "../builder-src/prepare.sh",
                 ],
             },
