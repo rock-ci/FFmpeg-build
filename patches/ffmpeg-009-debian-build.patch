@@ -1,0 +1,29 @@
+diff --git a/debian/control b/debian/control
+index 8223d84fc2..06877981d1 100644
+--- a/debian/control
++++ b/debian/control
+@@ -57,6 +57,10 @@ Build-Depends:
+  libdc1394-dev [linux-any],
+ # --enable-libdrm
+  libdrm-dev [linux-any],
++# --enable-v4l2-request
++ linux-libc-dev [linux-any],
++# --enable-libudev
++ libudev-dev [linux-any],
+ # --enable-libfontconfig
+  libfontconfig-dev,
+ # --enable-libfreetype
+diff --git a/debian/rules b/debian/rules
+index 24d252c4d2..837b86055c 100755
+--- a/debian/rules
++++ b/debian/rules
+@@ -138,6 +138,9 @@ endif
+ # Some libraries are built only on linux.
+ ifeq (linux,$(DEB_HOST_ARCH_OS))
+ 	CONFIG += --enable-libdc1394 \
++		--enable-v4l2_m2m \
++		--enable-libudev \
++		--enable-v4l2-request \
+ 		--enable-libdrm \
+ 		--enable-libiec61883
+ endif
