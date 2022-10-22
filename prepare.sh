@@ -48,5 +48,3 @@ done
 echo "******************"
 echo "** Prepare done **"
 echo "******************"
-
-#TODO: install linux-libc-dev, dpkg-buildpackage -b -us -uc --jobs=auto
