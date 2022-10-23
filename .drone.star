@@ -59,6 +59,7 @@ def main(ctx):
                     "cd /drone/build",
                     "wget https://github.com/sigmaris/linux/releases/download/6.0.3-rockpro64-ci/linux-libc-dev_6.0.3-g54e50e1b1-sigmaris_arm64.deb",
                     "apt-get -y install ./linux-libc-dev_6.0.3-g54e50e1b1-sigmaris_arm64.deb",
+                    "rm ./linux-libc-dev_6.0.3-g54e50e1b1-sigmaris_arm64.deb",
                     "../builder-src/build.sh",
                 ],
                 "depends_on": ["prepare"],
