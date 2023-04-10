@@ -10,14 +10,14 @@ index 8223d84fc2..06877981d1 100644
 + linux-libc-dev [linux-any],
 +# --enable-libudev
 + libudev-dev [linux-any],
+ # autodected: ffnvcodec
+  libffmpeg-nvenc-dev [amd64 arm64 i386],
  # --enable-libfontconfig
-  libfontconfig-dev,
- # --enable-libfreetype
 diff --git a/debian/rules b/debian/rules
 index 24d252c4d2..837b86055c 100755
 --- a/debian/rules
 +++ b/debian/rules
-@@ -138,6 +138,9 @@ endif
+@@ -144,6 +144,9 @@ endif
  # Some libraries are built only on linux.
  ifeq (linux,$(DEB_HOST_ARCH_OS))
  	CONFIG += --enable-libdc1394 \

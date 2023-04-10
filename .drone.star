@@ -5,10 +5,10 @@ FILEBUCKET_ENV = {
 }
 
 def main(ctx):
-    base_version = "7:4.3.4-0+deb11u1"
+    base_version = "7:5.1.2-3"
     drone_arch = "arm64"
     deb_arch = "arm64"
-    docker_img = "ghcr.io/sigmaris/ffmpegbuilder:bullseye"
+    docker_img = "ghcr.io/sigmaris/ffmpegbuilder:bookworm"
     return {
         "kind": "pipeline",
         "type": "docker",
