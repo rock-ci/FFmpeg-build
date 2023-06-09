@@ -14,7 +14,7 @@ jobs:
       - "${{ matrix.architecture }}"
     container: ghcr.io/sigmaris/ffmpegbuilder:bookworm
     env:
-      BASE_VERSION: "7:5.1.2-3"
+      BASE_VERSION: "7:5.1.3-1"
       RUNNER_ARCH: "${{ matrix.architecture }}"
     steps:
       - name: Determine DEB_ARCH
