@@ -13,9 +13,11 @@ jobs:
           - architecture: armhf
             runner_arch: ARM
             docker_platform: linux/arm/v7
+            suffix: "-rpi"
           - architecture: arm64
             runner_arch: ARM64
             docker_platform: linux/arm64
+            suffix: ""
     runs-on:
       - self-hosted
       - linux
@@ -26,6 +28,7 @@ jobs:
     env:
       BASE_VERSION: "7:5.1.3-1"
       DEB_ARCH: "${{ matrix.architecture }}"
+      PATCH_DIR: "patches${{ matrix.suffix }}"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -51,7 +54,7 @@ jobs:
       - name: Upload built artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ffmpeg-debs
+          name: "ffmpeg-debs${{ matrix.suffix }}"
           path: build/*.deb
 
   release:
