@@ -5,6 +5,7 @@ jobs:
   build_ffmpeg:
     name: Build FFmpeg
     strategy:
+      fail-fast: false
       matrix:
         architecture:
           - armhf
