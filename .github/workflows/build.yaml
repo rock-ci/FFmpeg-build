@@ -14,18 +14,30 @@ jobs:
           - architecture: armhf
             docker_platform: linux/arm/v7
             suffix: "-rpi"
+            volumes: '["/tmp/node20:/__e/node20"]'
           - architecture: arm64
             docker_platform: linux/arm64
             suffix: ""
+            volumes: '[]'
     runs-on: ubuntu-24.04-arm
     container:
       image: ghcr.io/sigmaris/ffmpegbuilder:trixie
       options: --platform ${{ matrix.docker_platform }}
+      volumes: ${{ fromJSON(matrix.volumes) }}
     env:
       BASE_VERSION: "7:7.1-4"
       DEB_ARCH: "${{ matrix.architecture }}"
       PATCH_DIR: "patches${{ matrix.suffix }}"
     steps:
+      - name: Work around https://github.com/actions/upload-artifact/issues/616
+        if: matrix.architecture == 'armhf'
+        run: |
+          ls -lar /__e/node20
+          curl -Lo /tmp/node.tar.gz https://unofficial-builds.nodejs.org/download/release/v20.18.3/node-v20.18.3-linux-armv6l.tar.gz
+          cd /__e/node20
+          tar -x --strip-components=1 -f /tmp/node.tar.gz
+          ls -lar /__e/node20/bin
+
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
