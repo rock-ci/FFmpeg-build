@@ -12,22 +12,17 @@ jobs:
           - arm64
         include:
           - architecture: armhf
-            runner_arch: ARM
             docker_platform: linux/arm/v7
             suffix: "-rpi"
           - architecture: arm64
-            runner_arch: ARM64
             docker_platform: linux/arm64
             suffix: ""
-    runs-on:
-      - self-hosted
-      - linux
-      - "${{ matrix.runner_arch }}"
+    runs-on: ubuntu-24.04-arm
     container:
-      image: ghcr.io/sigmaris/ffmpegbuilder:bookworm
+      image: ghcr.io/sigmaris/ffmpegbuilder:trixie
       options: --platform ${{ matrix.docker_platform }}
     env:
-      BASE_VERSION: "7:5.1.4-0+deb12u1"
+      BASE_VERSION: "7:7.1-4"
       DEB_ARCH: "${{ matrix.architecture }}"
       PATCH_DIR: "patches${{ matrix.suffix }}"
     steps:
@@ -53,18 +48,18 @@ jobs:
           ../builder-src/build.sh
 
       - name: Upload built artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "ffmpeg-debs${{ matrix.suffix }}"
           path: build/*.deb
 
   release:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: build_ffmpeg
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - name: Download built artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ffmpeg-debs
           path: ffmpeg-debs
