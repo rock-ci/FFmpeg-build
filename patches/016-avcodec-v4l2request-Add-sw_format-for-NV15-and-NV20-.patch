@@ -1,0 +1,31 @@
+From: Jonas Karlman <jonas@kwiboo.se>
+Date: Mon, 15 Jul 2024 16:20:46 +0000
+Subject: [11/11] avcodec/v4l2request: Add sw_format for NV15 and NV20 formats
+Origin: https://github.com/Kwiboo/FFmpeg/commit/7333b3c018378a49c427db4cbf4dd45a7c2d0ca1
+
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ libavcodec/v4l2_request_probe.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/libavcodec/v4l2_request_probe.c b/libavcodec/v4l2_request_probe.c
+index 941042ec04..af1610f17b 100644
+--- a/libavcodec/v4l2_request_probe.c
++++ b/libavcodec/v4l2_request_probe.c
+@@ -41,11 +41,11 @@ static const struct {
+     { V4L2_PIX_FMT_NV12_32L32, AV_PIX_FMT_NONE, DRM_FORMAT_NV12, DRM_FORMAT_MOD_ALLWINNER_TILED },
+ #endif
+ #if defined(V4L2_PIX_FMT_NV15) && defined(DRM_FORMAT_NV15)
+-    { V4L2_PIX_FMT_NV15, AV_PIX_FMT_NONE, DRM_FORMAT_NV15, DRM_FORMAT_MOD_LINEAR },
++    { V4L2_PIX_FMT_NV15, AV_PIX_FMT_NV15, DRM_FORMAT_NV15, DRM_FORMAT_MOD_LINEAR },
+ #endif
+     { V4L2_PIX_FMT_NV16, AV_PIX_FMT_NV16, DRM_FORMAT_NV16, DRM_FORMAT_MOD_LINEAR },
+ #if defined(V4L2_PIX_FMT_NV20) && defined(DRM_FORMAT_NV20)
+-    { V4L2_PIX_FMT_NV20, AV_PIX_FMT_NONE, DRM_FORMAT_NV20, DRM_FORMAT_MOD_LINEAR },
++    { V4L2_PIX_FMT_NV20, AV_PIX_FMT_NV20BS, DRM_FORMAT_NV20, DRM_FORMAT_MOD_LINEAR },
+ #endif
+ #if defined(V4L2_PIX_FMT_P010) && defined(DRM_FORMAT_P010)
+     { V4L2_PIX_FMT_P010, AV_PIX_FMT_P010, DRM_FORMAT_P010, DRM_FORMAT_MOD_LINEAR },
+-- 
+2.45.2
+
