@@ -25,7 +25,6 @@ jobs:
       options: --platform ${{ matrix.docker_platform }}
       volumes: ${{ fromJSON(matrix.volumes) }}
     env:
-      BASE_VERSION: "7:7.1-4"
       DEB_ARCH: "${{ matrix.architecture }}"
       PATCH_DIR: "patches${{ matrix.suffix }}"
     steps:
@@ -42,8 +41,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: builder-src
-      
-      - name: Build packages
+
+      - name: Prepare source
         run: |
           sudo apt-get update
           rm -rf build
@@ -57,6 +56,10 @@ jobs:
           else
             sudo apt-get -y install linux-libc-dev
           fi
+
+      - name: Build packages
+        run: |
+          cd build
           ../builder-src/build.sh
 
       - name: Upload built artifacts

@@ -2,24 +2,27 @@
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
+echo "***********************"
+echo "** Retrieving source **"
+echo "***********************"
+
+apt-get -y source ffmpeg
+
+BASE_VERSION="$(grep '^Version:' ffmpeg_*.dsc | awk '{print $2}')"
+echo "BASE_VERSION=$BASE_VERSION" >> "${GITHUB_ENV:-/dev/stdout}"
+
 source "${SCRIPT_DIR}/lib/versions.sh"
 
 : "${PATCH_DIR:=patches}"
 
 echo ""
+echo "Base version:     $BASE_VERSION"
 echo "Upstream version: $UPSTREAM_VER"
 echo "Debian revision:  $DEBIAN_REV"
 echo "Our revision      $OUR_REV"
 echo "Debian arch:      $DEB_ARCH"
 echo "Patch dir:        ${SCRIPT_DIR}/${PATCH_DIR}"
 echo ""
-
-
-echo "***********************"
-echo "** Retrieving source **"
-echo "***********************"
-
-apt-get -y source "ffmpeg=${BASE_VERSION}"
 
 cd "ffmpeg-${UPSTREAM_VER}"
 
