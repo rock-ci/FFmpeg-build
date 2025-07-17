@@ -49,7 +49,8 @@ jobs:
           mkdir build
           cd build
           ../builder-src/prepare.sh
-          if [[ "$DEB_ARCH" == "arm64" ]]; then
+          if [ "$DEB_ARCH" = "arm64" ]
+          then
             wget https://github.com/sigmaris/linux/releases/download/6.1.23-rockpro64-ci/linux-libc-dev_6.1.23-gcea19e56a-sigmaris_arm64.deb
             sudo apt-get -y --allow-downgrades install ./linux-libc-dev_6.1.23-gcea19e56a-sigmaris_arm64.deb
             rm ./linux-libc-dev_6.1.23-gcea19e56a-sigmaris_arm64.deb
