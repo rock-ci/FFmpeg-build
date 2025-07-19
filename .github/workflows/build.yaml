@@ -51,9 +51,10 @@ jobs:
           ../builder-src/prepare.sh
           if [ "$DEB_ARCH" = "arm64" ]
           then
-            wget https://github.com/sigmaris/linux/releases/download/6.1.23-rockpro64-ci/linux-libc-dev_6.1.23-gcea19e56a-sigmaris_arm64.deb
-            sudo apt-get -y --allow-downgrades install ./linux-libc-dev_6.1.23-gcea19e56a-sigmaris_arm64.deb
-            rm ./linux-libc-dev_6.1.23-gcea19e56a-sigmaris_arm64.deb
+            # Install linux headers for NV15 & NV20 support
+            wget https://github.com/sigmaris/linux/releases/download/6.14.5-rockpro64-ci/linux-libc-dev_6.14.5-1_arm64.deb
+            sudo apt-get -y --allow-downgrades install ./linux-libc-dev_6.14.5-1_arm64.deb
+            rm ./linux-libc-dev_6.14.5-1_arm64.deb
           else
             sudo apt-get -y install linux-libc-dev
           fi
