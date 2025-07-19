@@ -18,7 +18,7 @@ jobs:
           - architecture: arm64
             docker_platform: linux/arm64
             suffix: ""
-            volumes: '[]'
+            volumes: "[]"
     runs-on: ubuntu-24.04-arm
     container:
       image: ghcr.io/sigmaris/ffmpegbuilder:trixie
@@ -26,6 +26,7 @@ jobs:
       volumes: ${{ fromJSON(matrix.volumes) }}
     env:
       DEB_ARCH: "${{ matrix.architecture }}"
+      OUR_REV: "2"
       PATCH_DIR: "patches${{ matrix.suffix }}"
     steps:
       - name: Work around https://github.com/actions/upload-artifact/issues/616
